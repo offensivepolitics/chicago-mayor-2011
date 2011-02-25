@@ -12,7 +12,7 @@ ward_csv = FasterCSV.open("wards.csv", "w")
 ward_csv << ["ward"] + base_titles
 
 precinct_csv = FasterCSV.open("precincts.csv", "w")
-precinct_csv << ["ward", "precinct"] + base_titles
+precinct_csv << ["ward", "precinct"] + base_titles[1..-1]
 
 # load the master ward list from a local file so we dont have to do a POST to the server to grab just the mayoral results
 doc = Nokogiri::HTML(open("wards.html"))
