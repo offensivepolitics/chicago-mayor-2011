@@ -1,5 +1,6 @@
 Support scripts for blog post about election visualization of chicago mayoral race 2011. 
-Blog URL: http://offensivepolitics.net/blog/2011/02/mapping-the-20…cratic-primary/
+Mapping Blog URL: http://offensivepolitics.net/blog/2011/02/mapping-the-20…cratic-primary/
+Precincts-votes curve: http://offensivepolitics.net/blog/2011/02/more-chicago-mayoral-analaysis/
 
 =Scraping data=
 To scrape precinct level results you can run the included scraper.rb. This will produce a precincts.csv file in the local directory. The scraper relies on ruby 1.8 and FasterCSV. The data is scraped directly from the chicago board of elections. 
@@ -13,3 +14,8 @@ To generate the maps you'll need to have a recent (2.10 or greater) install of R
 
 The precinct level shapefiles were pulled from the city of chicago GIS site and are stored in the Precincts subdirectory. Big thanks to them for having accurate precinct-level shapefiles readily accessibly. 
 The R code uses ggplot to actually create the graphics, and was heavily based off an entry in the ggplot wiki (https://github.com/hadley/ggplot2/wiki/plotting-polygon-shapefiles). Thanks to whomever put that together. 
+
+== Precincts - Votes Curve ==
+
+The precincts votes curves are a modified plot of a kernel density estimator on candidate vote share per precinct. These curves are a modified Seats-Votes curve taken from various literature and based on Prof Jackman's PSCL package (http://pscl.stanford.edu/).
+The blog post describing these curves is located at: http://offensivepolitics.net/blog/2011/02/more-chicago-mayoral-analaysis/
