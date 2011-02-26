@@ -93,7 +93,7 @@ dev.off()
 png("all_sv.png",width=620,height=620)
 qplot(x=value,group=variable,color=variable,data=df.m,geom="density",
 		main="Precincts-Votes Curve, Chicago Mayor 2011",xlab="Vote %",ylab="Density") + 
-		scale_color_brewer(palette="Set3",name="Candidate") + geom_vline(x=50)
+		scale_color_brewer(name="Candidate") + geom_vline(x=50)
 dev.off()
 
 # Candidates Walls, Watkins, and Braun performed very poorly in a majority of precincts so the scale is off for the rest of the candidates. 
@@ -101,6 +101,6 @@ dev.off()
 png("emanuel_delvalle_chico_sv.png",width=620,height=620)
 qplot(x=value,group=variable,color=variable,data=subset(df.m,variable != 'walls_pct' & variable != 'braun_pct' & variable != 'watkins_pct'),
  		geom="density",main="Precincts-Votes Curve, Chicago Mayor 2011",xlab="Vote %",ylab="Density") + 
- 		scale_color_brewer(palette="Set3",name="Candidate", labels=c("Emanuel", "Del Valle", "Chico"),
+ 		scale_color_brewer(name="Candidate", labels=c("Emanuel", "Del Valle", "Chico"),
 		breaks=c("emanuel_pct", "delvalle_pct","chico_pct")) + geom_vline(x=50)
 dev.off()
