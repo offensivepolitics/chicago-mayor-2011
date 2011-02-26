@@ -80,4 +80,27 @@ png("walls.png",width=620,height=620)
 ggplot(shp.df,aes(long,lat,group=group)) + geom_polygon(aes(fill=walls_pct_f)) + 
 	coord_equal() + scale_fill_brewer(palette="Blues",name="Walls %") + blank_opts + opts(title="Chicago Mayoral Race 2011")
 dev.off()
+
+# melt the data frame from wide to long form by WARD_PRECINCT for each election % return
+df.m <- melt(df,"WARD_PRECINCT", c("emanuel_pct","delvalle_pct","braun_pct","chico_pct","watkins_pct","walls_pct"))
+
+# generate one precincts-votes plot for emanuel
+png("emanuel_sv.png",width=620,height=620)
+qplot(emanuel_pct,data=df,geom=c("density","rug"),main="Precincts-Votes Curve, Chicago Mayor 2011",xlab="Vote %",ylab="Density")
+dev.off()
 		
+# generate a combined precincts-votes plot for all candidates
+png("all_sv.png",width=620,height=620)
+qplot(x=value,group=variable,color=variable,data=df.m,geom="density",
+		main="Precincts-Votes Curve, Chicago Mayor 2011",xlab="Vote %",ylab="Density") + 
+		scale_color_brewer(palette="Set3",name="Candidate")
+dev.off()
+
+# Candidates Walls, Watkins, and Braun performed very poorly in a majority of precincts so the scale is off for the rest of the candidates. 
+# Exclude those candidates to better understand the performance of the top 3 candidates
+png("emanuel_delvalle_chico_sv.png",width=620,height=620)
+qplot(x=value,group=variable,color=variable,data=subset(df.m,variable != 'walls_pct' & variable != 'braun_pct' & variable != 'watkins_pct'),
+ 		geom="density",main="Precincts-Votes Curve, Chicago Mayor 2011",xlab="Vote %",ylab="Density") + 
+ 		scale_color_brewer(palette="Set3",name="Candidate", labels=c("Emanuel", "Del Valle", "Chico"),
+		breaks=c("emanuel_pct", "delvalle_pct","chico_pct"))
+dev.off()
